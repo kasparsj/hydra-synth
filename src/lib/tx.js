@@ -24,7 +24,6 @@ const data = (data, options = {}) => {
         // }
     }
     const {id, min, mag, filter, ...texOptions} = options;
-    let texture = id ? textures[id] : null;
     if (Array.isArray(data[0]) || data[0] instanceof Float32Array || data[0] instanceof Uint8Array) {
         const height = data.length;
         const width = data[0].length;
@@ -45,6 +44,7 @@ const data = (data, options = {}) => {
     else if (topts.data.length > topts.width * topts.height) {
         topts.data = topts.data.slice(0, topts.width * topts.height);
     }
+    let texture = id ? textures[id] : null;
     if (!texture || texture.width !== topts.width || texture.height !== topts.height) {
         texture = regl.texture(topts);
         if (id) {
